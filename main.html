@@ -1,0 +1,44 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+<script src="http://upcdn.b0.upaiyun.com/libs/jquery/jquery-2.0.2.min.js"></script>
+<script src='https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js'></script>
+</head>
+<body>
+<table id='example'>
+	<thead>
+		<th>Name</th>
+		<th>Position</th>
+		<th class='change'>Tel</th>
+	</thead>
+</table>
+<script type="text/javascript">
+	var table;
+	var dataset=[{"name":"Allen","position":"DA","tel":"110"},{"name":"Allen","position":"DA","tel":"119"}];
+	var columnset = [{data:'name'},{data:'position'},{data:'tel'}];
+	$(document).ready(function(){
+		setTable(dataset,columnset);
+	})
+	function setTable(dataset,columnset){
+		table = $('#example').DataTable({
+			data:dataset,
+			columns:columnset,
+			columnDefs:[{
+				targets:0,
+				render:function(data,type,row,meta){
+					return data+" <span id='change' onclick='change()'>change</span>";
+				}
+			}]
+		});
+		table.on( 'draw', function () {
+    	alert( 'Table redrawn' );
+		});
+	}
+	function change(){
+		$('.change').toggle();
+		dataset = [{"name":"bllen","position":"DA"},{"name":"Allen","position":"DA"}];
+		alert(dataset[0]["name"]);
+	}
+</script>
+</body>
+</html>
